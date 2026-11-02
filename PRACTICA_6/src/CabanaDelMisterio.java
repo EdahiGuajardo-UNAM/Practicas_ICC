@@ -39,20 +39,13 @@ public class CabanaDelMisterio{
             }
 
 
-             double tasa_interes=-1.0;
-             while(tasa_interes<=0.0){
-               System.out.println("Ingresa la tasa anual base : ");   
-                   if(!scanner.hasNextDouble()){
-                       System.out.println("Error:Ingresa un número con decimales: ");
-                       scanner.next();   
-                   }else{
-                       tasa_interes=scanner.nextDouble()/100;
-                       if(capital<0.0){
-                           System.out.println("Error: La tasa anual debe ser mayor a cero");   
-                       }   
-                   }
-                   
-               }
+             double tasa_interes=0.15;
+                          
+             if(clasificación=='P'){
+                tasa_interes=0.13;
+            }else if(clasificación=='R'){
+                tasa_interes=0.18;
+            }
                
                   
                 
@@ -77,24 +70,22 @@ public class CabanaDelMisterio{
                   }
                   
               }
+
+              //Menu
+              String menu = """
+                ##### Sistema de prestamos de la Cabaña del misterio #####
+                > Las operaciones disponibles son
+                1) Cotizar con interes simple.
+                2) Cotizar con interes compuesto.
+                3) Comparar interes simple y compuesto.
+                4) Cambiar el capital del prestamo.
+                0) Salir.
+                """;
+
               
-                 
-            
 
-        
-            
-            
 
-            //Validación de datos para el cálculo
-            if(capital >0 && tasa_interes > 0 && meses>0){
-
-                if(clasificación=='P'){
-                    tasa_interes=0.13;
-                }else if(clasificación=='R'){
-                    tasa_interes=0.18;
-                }
-                //Validación de clasificación correcta
-                if(clasificación=='E' || clasificación=='P'|| clasificación=='R'){
+                               
                 //se calcula el interes anual
                 double interes_simple = (capital * tasa_interes)*meses/12;
                 //se calcula el interes mensual
@@ -108,46 +99,158 @@ public class CabanaDelMisterio{
                 double tasa_mensual= tasa_interes/12;
                 //se inicializa el valor de la deuda con la del capital inicial
                 double  deuda = capital;
-                //número de ciclos igual a meses, empieza en 1 y va aumentando en 1  
-                    for(int i=1; i<=meses; i++){
-                        //actualización de deuda
-                        deuda=deuda*(1+tasa_mensual);
-                        System.out.printf("En el mes %d se tiene un saldo de %.2f %n", i, deuda);
-                    }
 
                 //variable de saldo_final_compuesto
                 double saldo_final=capital * Math.pow(1+tasa_mensual, meses);
                 //cálculo de interés compuesto
                 double interes_compuesto= saldo_final-capital;
-                //se imprimen resultados
-                System.out.printf("Tasa aplicada = %.2f %n", tasa_interes);
-                System.out.printf("Préstamo= %d %n", capital);
-                System.out.printf("Meses de pago = %d %n", meses);
-                System.out.printf("Interés simple = $%.2f %n", interes_simple);
-                System.out.printf("Total con interés simple = $%.2f %n", pago_total_simple);
-                System.out.printf("Interés compuesto = $%.2f %n", interes_compuesto);
-                System.out.printf("Total con inter ́es compuesto: %2f ", saldo_final);
+                double dif= interes_compuesto-interes_simple;
+                //RESUMEN
+                String resumen = """
+                    ##### RESUMEN #####
+                    Interés simple = %.2f
+                    Total con interés simple = %.2f
+                    Interés compuesto = %.2f
+                    Total con interés compuesto = %.2f
+                    Diferencia = %.2f
+                    """.formatted(interes_simple, pago_total_simple, interes_compuesto, saldo_final, dif);
+                    //Inicialización de variables que dictan comportamiento de los ciclos
+                    int opcion = -1;
+                    int conteo_errores=0;
+                    int conteo_ciclos=0;
+                    //se fuerza el primer ciclo
+                    do{
+                        //se imprime menu
+                        System.out.println(menu);
+                        System.out.print("Elige una opción: ");
+                        //validación que sea un entero
+                        if(scanner.hasNextInt()){
+                            //pasa prueba y se asigna el valor del propmt
+                            opcion = scanner.nextInt();
+                            //segunda validación: si es un enter0 válido entre las opciones
+                            if(opcion >= 0 && opcion <= 4){
+                                                               
+                                switch(opcion){
+                                    case 1:
+                                        System.out.println("Nombre:"+ nombre_estudiante);
+                                        System.out.println("Capital:"+ capital);
+                                        System.out.println("Tasa de interés:"+ tasa_interes);
+                                        System.out.println("Meses:"+ meses);
+                                        System.out.println("Interés simple:"+ interes_simple);
+                                        System.out.println("Pago:"+ pago_total_simple);
+                                        System.out.println("\n");
+                                        conteo_ciclos++;
+                                         
+                                        break;
                 
-                }else{
-                    System.out.printf("Clasificación no válida");
+                                    case 2:
+                                        System.out.println("Nombre:"+ nombre_estudiante);
+                                        System.out.println("Capital:"+ capital);
+                                        System.out.println("Tasa de interés:"+ tasa_interes);
+                                        System.out.println("Meses:"+ meses);
+                                        //número de ciclos igual a meses, empieza en 1 y va aumentando en 1  
+                                         for(int i=1; i<=meses; i++){
+                                             //actualización de deuda
+                                             deuda=deuda*(1+tasa_mensual);
+                                             System.out.printf("En el mes %d se tiene un saldo de %.2f %n", i, deuda);
+                                         }
+                                        System.out.println("Interés compuesto:"+ interes_compuesto);
+                                        System.out.println("Pago:"+ saldo_final);
+                                        System.out.println("\n");
+                                        conteo_ciclos++;
+
+                                    
+                                        break;  
+                                    case 3:
+                                        System.out.println("Interés simple:"+ interes_simple);
+                                        System.out.println("Interés compuesto:"+ interes_compuesto);
+                                        if(interes_simple>interes_compuesto){
+                                            System.out.println("Interés simple es mayor");
+                                                System.out.println("Diferencia: $" + dif );
+            
+                                        }else{
+                                            System.out.println("Interés compuesto es mayor");
+                                            
+                                            System.out.println("Diferencia: $"+ dif );
+                                           
+                                        }
+            
+                                        System.out.println("\n");
+                                        conteo_ciclos++;
+                                         
+                                        break;                    
+                                    case 4:
+                                    //Se reinicia el valor del capital
+            
+                                    capital=-1;
+            
+            
+                                        //mismas validaciones que al principio
+                                        while (capital <= 0) {
+                                            System.out.print("Ingresa la cantidad de capital: ");
+                                        
+                                            if (!scanner.hasNextInt()) {
+                                                System.out.println("Error: Ingresa un número entero.");
+                                                scanner.next(); // Limpia la entrada de texto
+                                            } else {
+                                                capital = scanner.nextInt(); // Única lectura del entero
+                              
+                                        
+                                                if (capital <= 0) { // Evalúa si es menor o IGUAL a cero
+                                                    System.out.println("Error: El capital tiene que ser un número mayor a cero.");
+                                                }
+                                            }
+                                            System.out.println("\n");
+                                            conteo_ciclos++;
+
+                                          
+                                        }
+            
+            
+                                        break;                    
+                                    case 0:
+                                        //salida manual
+                                        System.out.println("Saliendo del sistema...");
+                                        break;                    
+                                                                        
                 
-                }
+                                }
+                            }else{
+                               // Error por opción fuera de rango 
+                                conteo_errores++;
+                                System.out.printf("Error: Opción fuera de rango (%d/3 errores).%n", conteo_errores);
+                            }
+                            
+                            
+
+                        }else{
+                            // Error por opción inválida
+                            System.out.println("Error: Favor de ingresar una opción válida del menú.");
+                            // Limpia la entrada no válida
+                            scanner.next(); 
+                            opcion = -1;
+                            conteo_errores++;
+                            System.out.printf("Errores acumulados: %d/3%n", conteo_errores);
+
+                        }
+
+                        // Verificar si se alcanzó el límite de 3 errores
+                        if (conteo_errores >= 3) {
+                            System.out.println("\nLímite de errores alcanzado, te muestro tu resumen y me despido:");
+                            opcion = 0; 
+
+                        }else if (conteo_ciclos >= 5) {
+                             System.out.println("\nHas alcanzado el límite máximo de 5 operaciones permitidas.");
+                             // Fuerza la salida del ciclo
+                             opcion = 0; 
+                            }
 
 
-            //Si el dato esta mal informa al usuario que dato
-            }else{
-                
-                if(capital<0){
-                    System.out.println("El dato del capital es erroneo");
-                }
-                if(tasa_interes<0) {
-                    System.out.println("El dato de la tasa de interés esta mal");
-                }
-                if(meses<0){
-                    System.out.println("El dato de meses de interés esta mal");
-                }
-
-            }
+                        
+                    }while(opcion!=0);
+                    System.out.println(resumen);
+     
+  
 
         }while(exit);
 
