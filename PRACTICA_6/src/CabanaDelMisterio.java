@@ -27,12 +27,13 @@ public class CabanaDelMisterio{
             
                 if (!scanner.hasNextInt()) {
                     System.out.println("Error: Ingresa un número entero.");
-                    scanner.next(); // Limpia la entrada de texto
+
+                    scanner.next(); 
                 } else {
-                    capital = scanner.nextInt(); // Única lectura del entero
+                    capital = scanner.nextInt(); 
   
-            
-                    if (capital <= 0) { // Evalúa si es menor o IGUAL a cero
+  
+                    if (capital <= 0) {
                         System.out.println("Error: El capital tiene que ser un número mayor a cero.");
                     }
                 }
@@ -191,12 +192,12 @@ public class CabanaDelMisterio{
                                         
                                             if (!scanner.hasNextInt()) {
                                                 System.out.println("Error: Ingresa un número entero.");
-                                                scanner.next(); // Limpia la entrada de texto
+                                                scanner.next();
                                             } else {
-                                                capital = scanner.nextInt(); // Única lectura del entero
+                                                capital = scanner.nextInt(); 
                               
                                         
-                                                if (capital <= 0) { // Evalúa si es menor o IGUAL a cero
+                                                if (capital <= 0) { 
                                                     System.out.println("Error: El capital tiene que ser un número mayor a cero.");
                                                 }
                                             }
