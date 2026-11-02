@@ -1,4 +1,4 @@
-# 🌲 Sistema de Préstamos - Practica 06
+#  Practica 06
 
 Dentro de esta práctica se encuentran 3 programas
 
@@ -16,13 +16,6 @@ Este programa  interactivo convierte a binario cualquier número entero positivo
 ## Cotizador interactivo
 Este programa  interactivo cálcula  puede calcular los intereses simples o compuestos de un préstamo y su saldo final, incluye un menú interactivo con varias opciones.
 
-## 🚀 Características
-
-* **Cotización de Interés Simple:** Cálculo directo de rendimientos y montos totales.
-* **Cotización de Interés Compuesto:** Simulación de acumulación periódica de intereses.
-* **Comparación Financiera:** Muestra las diferencias entre ambos tipos de interés y el monto final a pagar.
-* **Validación de Entradas:** Manejo de datos inválidos mediante `Scanner` sin que el programa colapse.
-* **Control de Intentos:** Limita el número de errores continuos (máximo 3) y el número de operaciones por sesión (máximo 5).
 
 ---
 
@@ -37,5 +30,9 @@ Este programa  interactivo cálcula  puede calcular los intereses simples o comp
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/tu-usuario/cabana-prestamos.git](https://github.com/tu-usuario/cabana-prestamos.git)
-   cd cabana-prestamos
+   git clone https://github.com/EdahiGuajardo-UNAM/Practicas_ICC.git
+   cd PRACTICA_06
+   cd bin
+   java CabanaDelMisterio
+
+   
