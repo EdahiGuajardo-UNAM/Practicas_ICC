@@ -151,9 +151,18 @@ public class Punto {
                 return 1;
             }
 
-            if{this.x<0 && this.y>0}{
+            if(this.x<0 && this.y>0){
                 return 2;
             }
+            if(this.x<0 && this.y<0){
+                return 3;
+            }
+            if(this.x>0 && this.y<0){
+                return 4;
+            }
+
+            return 0;
+
     }
 
     /**
@@ -167,8 +176,28 @@ public class Punto {
     public boolean estanAlineados(Punto p2, Punto p3) {
         // POR HACER: Valida que p2 y p3 no sean null.
         // Evalua la condicion de colinealidad
+        if(p2==null || p3==null){
+            return false;
+            
+        }
+
+        double dx1 = p2.getX() - this.getX();
+        double dy1 = p2.getY() - this.getY();
+        double dx2 = p3.getX() - this.getX();
+        double dy2 = p3.getY() - this.getY();
+
+        // Producto cruz (determinante): si es 0, los puntos están sobre la misma recta
+        double determinante = (dx1 * dy2) - (dy1 * dx2);
+
+        if(determinante==0){
+            return true;
+        }
 
         return false;
+
+       
+
+        
     }
 
     /**
@@ -177,7 +206,8 @@ public class Punto {
      * @return Cadena con el formato "(x, y)".
      */
     public String toString() {
-        return "a";
+
+         return "(" + this.getX() + ", " + this.getY() + ")";
     }
 
     /**
@@ -192,6 +222,17 @@ public class Punto {
     public boolean equals(Object obj) {
         // POR HACER: Verifica si obj es null o si no es una instancia de Punto.
         // Compara por distancia o diferencia absoluta de coordenadas con tolerancia.
-        return false;
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Punto)) {
+            return false;
+        }
+
+        Punto otro = (Punto) obj;
+        return this.distancia(otro) < 1e-6;
+    
     }
 }
