@@ -139,13 +139,11 @@ public class Envio {
      */
     public boolean esEnvioForaneo() {
         // POR HACER: Delega la comparacion de ubicacion en los objetos Persona agregados.
-
-        if(this.destinatario.getCodigoPostal()!=this.remitente.getCodigoPostal()){
-            return true;
-        }else{
+        if (this.remitente == null || this.destinatario == null) {
             return false;
-
         }
+        return !this.remitente.mismaUbicacionQue(this.destinatario);
+
 
 
         
@@ -207,14 +205,18 @@ public class Envio {
      * @return Nuevo objeto Envio configurado para el retorno al remitente original.
      */
     public Envio generarGuiaRetorno() {
-        // POR HACER: Instancia y devuelve la guia de retorno.
-        Envio guia_retorno = new Envio(destinatario, remitente, paquete);
-        Paquete paquete_retorno =  guia_retorno.getPaquete();
+        // 1. Validación defensiva: si falta algún dato esencial en la guía actual, no se puede generar el retorno
+        if (this.remitente == null || this.destinatario == null || this.paquete == null) {
 
-        paquete_retorno.setCodigoRastreo("RET-" + paquete_retorno.getCodigoRastreo());
+            return null;
+        }
 
-        return guia_retorno;
-    }
+        Paquete paqueteRetorno = new Paquete(this.paquete);
+        paqueteRetorno.setCodigoRastreo("RET-" + paqueteRetorno.getCodigoRastreo());
+
+        return new Envio(this.destinatario, this.remitente, paqueteRetorno);
+
+           }
 
     /**
      * Emite el comprobante textual de la guia de envio delegando en toString()
@@ -225,12 +227,16 @@ public class Envio {
      */
     @Override
     public String toString() {
-        String ruta = esEnvioForaneo()? "Fornaeo" : "Local";
+        String ruta = esEnvioForaneo()? "Foraneo" : "Local";
+        String infoRemitente = (this.remitente != null) ? this.remitente.toString() : "Sin remitente";
+        String infoDestinatario = (this.destinatario != null) ? this.destinatario.toString() : "Sin destinatario";
+        String infoPaquete = (this.paquete != null) ? this.paquete.toString() : "Sin paquete";
         // POR HACER: Construye el comprobante de la guia de envio.
-        return "Remitente: " + this.remitente+ "\n" +
-               "Destinatario: " + this.destinatario + "\n"+
-               "Paquete: "+ this.paquete.toString() + "\n" +
-               "Folio: "+ this.folioGuia + "\n"+ ruta;
-
+        return "Folio: " + this.folioGuia + "\n" +
+        "Ruta: " + ruta + "\n" +
+        "Costo total: $" + calcularCostoTotal() + "\n" +
+        "Remitente:\n" + infoRemitente + "\n" +
+        "Destinatario:\n" + infoDestinatario + "\n" +
+        "Paquete:\n" + infoPaquete;
     }
 }

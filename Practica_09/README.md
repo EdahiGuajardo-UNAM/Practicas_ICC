@@ -172,7 +172,179 @@ Local
 Copia y pega aquí un ejemplo sencillo de interacción en terminal ejecutando `MenuPostal`:
 
 ```text
-[Pega aquí tu ejemplo de ejecución del menú interactivo]
+cesarguajardo@pop-os:~/unam/INTRO_CC/PRACTICAS_JAVA/Practica_09$ java -cp bin MenuPostal
+================================================================
+  SISTEMA INTERACTIVO DE GUIAS POSTALES | ICC 2027-1
+================================================================
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 1
+
+--- Captura de datos del REMITENTE ---
+
+--- Captura de la Persona ---
+  ID (ejemplo: 01): 05
+  Nombre: Juan
+  Código Postal (ejemlo: 00235):  09876
+
+--- Captura de datos del DESTINATARIO ---
+
+--- Captura de la Persona ---
+  ID (ejemplo: 01): 07
+  Nombre: Ximena
+  Código Postal (ejemlo: 00235):  245650
+
+--- Captura de datos del Paquete ---
+  Codigo de rastreo (ej. PKG-500): PKG-100
+  Peso fisico en kg (ej. 3.5): 5.0
+  Alto en cm (ej. 20): 14
+  Ancho en cm (ej. 20): 27
+  Largo en cm (ej. 30): 45
+  Valor declarado en MXN (ej. 800): 500
+  ¿Es envio express? (s/n): S
+
+Guia emitida con exito:
+Folio: GUIA-065-1
+Ruta: Foraneo
+Costo total: $200.0
+Remitente:
+Nombre: Juan
+ ID: 05
+ Código postal: 09876
+Destinatario:
+Nombre: Ximena
+ ID: 07
+ Código postal: 245650
+Paquete:
+Código de rastreo: PKG-100
+ Peso real: 5.0
+ Peso volumétrico: 3.402
+ Peso cobrable: 5.0
+ Valor declarado: 500.0
+ Modalidad exprés: true
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 2
+
+--- Captura de datos del Paquete ---
+  Codigo de rastreo (ej. PKG-500): PKG-200
+  Peso fisico en kg (ej. 3.5): 20
+  Alto en cm (ej. 20): 15
+  Ancho en cm (ej. 20): 12
+  Largo en cm (ej. 30): 17
+  Valor declarado en MXN (ej. 800): 600
+  ¿Es envio express? (s/n): n
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 2
+
+--- Captura de datos del Paquete ---
+  Codigo de rastreo (ej. PKG-500): PKG-300
+  Peso fisico en kg (ej. 3.5): 15.0
+  Alto en cm (ej. 20): 14
+  Ancho en cm (ej. 20): 24
+  Largo en cm (ej. 30): 23
+  Valor declarado en MXN (ej. 800): 600
+  ¿Es envio express? (s/n): s
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 3
+Nuevo Destinatario
+
+--- Captura de la Persona ---
+  ID (ejemplo: 01): 10
+  Nombre: Raul
+  Código Postal (ejemlo: 00235):  008327 
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 4
+Guia de retorno:
+Folio: GUIA-106-4
+Ruta: Foraneo
+Costo total: $200.0
+Remitente:
+Nombre: Raul
+ ID: 10
+ Código postal: 008327
+Destinatario:
+Nombre: Juan
+ ID: 05
+ Código postal: 09876
+Paquete:
+Código de rastreo: RET-PKG-100
+ Peso real: 5.0
+ Peso volumétrico: 3.402
+ Peso cobrable: 5.0
+ Valor declarado: 500.0
+ Modalidad exprés: true
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 5
+
+Folio: GUIA-065-1
+Ruta: Foraneo
+Costo total: $200.0
+Remitente:
+Nombre: Juan
+ ID: 05
+ Código postal: 09876
+Destinatario:
+Nombre: Raul
+ ID: 10
+ Código postal: 008327
+Paquete:
+Código de rastreo: PKG-100
+ Peso real: 5.0
+ Peso volumétrico: 3.402
+ Peso cobrable: 5.0
+ Valor declarado: 500.0
+ Modalidad exprés: true
+
+--- MENU PRINCIPAL ---
+1. Emitir nueva guia de envio
+2. Clonar guia activa con un nuevo paquete (mismo remitente y destinatario)
+3. Clonar paquete de la guia activa para enviarlo a otro destinatario
+4. Generar guia de retorno (devolucion al remitente)
+5. Mostrar detalle y costo de la guia activa
+0. Salir
+Seleccione una opcion: 0
+Saliendo del sistema postal...
 ```
 
 ---

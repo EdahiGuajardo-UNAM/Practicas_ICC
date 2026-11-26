@@ -41,18 +41,44 @@ public class MenuPostal {
                     break;
 
                 case "2":
-                    // POR HACER: Llama a tu metodo auxiliar para clonar guiaActiva con un nuevo paquete.
-                    System.out.println("[Por hacer: Opcion 2 - Clonar guia activa]");
+                    if (guiaActiva == null) {
+                        System.out.println("No hay una guia activa. Emite una primero (opcion 1).");
+                    } else {
+                        Paquete nuevoPaquete = capturarPaquete(sc);
+                        guiaActiva = new Envio(guiaActiva, nuevoPaquete);
+                        System.out.println("Guia clonada exitosamente:");
+                        mostrarGuiaActiva(guiaActiva);
+                    }
                     break;
 
                 case "3":
-                    // POR HACER: Llama a tu metodo auxiliar para clonar el paquete hacia otro destinatario.
-                    System.out.println("[Por hacer: Opcion 3 - Enviar paquete clonado]");
+                    if (guiaActiva == null || guiaActiva.getPaquete() == null) {
+                        System.out.println("No hay una guia activa con paquete valido.");
+                    } else {
+                        System.out.println("Nuevo Destinatario:");
+                        Persona nuevoDestinatario = capturarPersona(sc);
+                        Paquete paqueteClonado = new Paquete(guiaActiva.getPaquete());
+                        guiaActiva = new Envio(guiaActiva.getRemitente(), nuevoDestinatario, paqueteClonado);
+                        System.out.println("Nueva guia generada con paquete clonado:");
+                        mostrarGuiaActiva(guiaActiva);
+                    }
                     break;
-
                 case "4":
                     // POR HACER: Llama a tu metodo auxiliar para generar la guia de retorno.
-                    System.out.println("[Por hacer: Opcion 4 - Generar guia de retorno]");
+                    if (guiaActiva == null) {
+                        System.out.println("No hay una guia activa.");
+                    } else {
+                        Envio guiaRetorno = guiaActiva.generarGuiaRetorno();
+                        if (guiaRetorno == null) {
+                            System.out.println("No se pudo generar la guia de retorno (datos incompletos).");
+                        } else {
+                            System.out.println("Guia de retorno:");
+                            System.out.println(guiaRetorno);
+                        }
+                    }
+
+                                    
+
                     break;
 
                 case "5":
@@ -135,8 +161,19 @@ public class MenuPostal {
         // Pide al usuario por consola los atributos que definiste en tu clase Persona
         // (por ejemplo: identificador corto, nombre completo y ciudad/ubicacion)
         // y devuelve la instancia creada.
-        return null;
-    }
+        System.out.println("\n--- Captura de la Persona ---");
+        System.out.print("  ID (ejemplo: 01): ");
+        String id = sc.nextLine();
+        System.out.print("  Nombre: ");
+        String nombre= sc.nextLine();
+        System.out.print("  Código Postal (ejemlo: 00235):  ");
+        String cp= sc.nextLine();
+
+        return new Persona(id,nombre,cp);
+
+
+
+       }
 
     /**
      * Opcion 1 (REFERENCIA IMPLEMENTADA): Captura remitente, destinatario
